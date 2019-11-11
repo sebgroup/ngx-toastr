@@ -1,0 +1,42 @@
+dist: trusty
+sudo: false
+addons:
+  chrome: stable
+language: node_js
+node_js: lts/*
+
+install:
+- npm ci
+cache:
+  directories:
+  - $HOME/.npm
+
+script:
+- npm run test-ci
+- if [ "$TRAVIS_BRANCH" == "master" ];
+  then npm run build && npm run build-lib;
+  else npm run build-dev && npm run build-lib;
+  fi
+- npm run e2e-ci
+
+deploy:
+  - provider: pages
+    skip-cleanup: true
+    github-token: $GITHUB_TOKEN
+    keep-history: true
+    local-dir: dist/ngx-toastr
+    on:
+      branch: master
+
+git:
+  depth: 3
+
+after_success:
+- if [ "$TRAVIS_BRANCH" == "master" ];
+  then npm run travis-deploy-once "npm run semantic-release";
+  fi
+
+
+branches:
+  except:
+  - /^v\d+\.\d+\.\d+$/

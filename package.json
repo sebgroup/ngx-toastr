@@ -1,38 +1,72 @@
 {
-  "name": "ngx-toastr",
-  "version": "0.0.0",
+  "name": "@sebgroup/ngx-toastr",
+  "version": "1.0.0",
+  "homepage": "https://sebgroup.github.io/ngx-toastr/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "ng serve --port=4201",
+    "build": "ng build --base-href https://sebgroup.github.io/ngx-toastr/ && copyfiles -f src/404.html dist/ngx-toastr",
+    "build-lib": "copyfiles -u 1 'scss/**/*.scss' dist/lib/scss && copyfiles -f CHANGELOG.md LICENSE.md README.md scss/package.json dist/lib",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "commit": "git-cz",
+    "travis-deploy-once": "travis-deploy-once --pro",
+    "semantic-release": "semantic-release && npm run build",
+    "package-lock-sanitizer": "package-lock-sanitizer"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run package-lock-sanitizer && git add package-lock.json",
+      "commit-msg": "commitlint --edit"
+    }
+  },
+  "release": {
+    "pkgRoot": "dist/lib"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^7.0.4",
-    "@angular/common": "~7.0.0",
-    "@angular/compiler": "~7.0.0",
-    "@angular/core": "~7.0.0",
-    "@angular/forms": "~7.0.0",
-    "@angular/http": "~7.0.0",
-    "@angular/platform-browser": "~7.0.0",
-    "@angular/platform-browser-dynamic": "~7.0.0",
-    "@angular/router": "~7.0.0",
+    "@angular/animations": "^8.2.13",
+    "@angular/common": "~8.2.13",
+    "@angular/compiler": "~8.2.13",
+    "@angular/core": "~8.2.13",
+    "@angular/forms": "~8.2.13",
+    "@angular/platform-browser": "~8.2.13",
+    "@angular/platform-browser-dynamic": "~8.2.13",
+    "@angular/router": "~8.2.13",
+    "@sebgroup/bootstrap": "^4.0.0",
+    "angular-exemplify": "^3.1.4",
     "core-js": "^2.5.4",
-    "rxjs": "~6.3.3",
-    "zone.js": "~0.8.26"
+    "ngx-toastr": "^11.2.1",
+    "prismjs": "^1.17.1",
+    "rxjs": "~6.5.3",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.10.0",
-    "@angular/cli": "~7.0.5",
-    "@angular/compiler-cli": "~7.0.0",
-    "@angular/language-service": "~7.0.0",
-    "@types/node": "~8.9.4",
+    "@angular-devkit/build-angular": "~0.803.18",
+    "@angular/cli": "~8.3.18",
+    "@angular/compiler-cli": "~8.2.13",
+    "@angular/language-service": "~8.2.13",
+    "@commitlint/cli": "^8.2.0",
+    "@commitlint/config-conventional": "^8.2.0",
     "@types/jasmine": "~2.8.8",
     "@types/jasminewd2": "~2.0.3",
-    "codelyzer": "~4.5.0",
+    "codelyzer": "^5.0.1",
+    "commitizen": "^4.0.3",
+    "copyfiles": "^2.1.1",
+    "cz-conventional-changelog": "^3.0.2",
+    "husky": "^3.0.9",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.0.0",
@@ -40,9 +74,19 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "package-lock-sanitizer": "^1.0.0",
     "protractor": "~5.4.0",
+    "semantic-release": "^15.13.30",
+    "travis-deploy-once": "^5.0.11",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sebgroup/ngx-toastr.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }

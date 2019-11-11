@@ -1,20 +1,105 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<div class="container-content">
+  <h1 class="my-3">@sebgroup/ngx-toastr</h1>
+  <p class="lead">A SEB themed toaster component for @sebgroup/bootstrap and angular</p>
+  <div class="card my-3 mx-n3 mx-md-0">
+    <h4 class="card-header">Installation and usage</h4>
+    <div class="card-body">
+      <p>See example usage and configuration below, please note that this is a wrapped version of <a href="https://ngx-toastr.netlify.com/" target="_blank">ngx-toastr</a>, for more examples and a full list of feature please head to the <a href="https://github.com/scttcper/ngx-toastr" target="_blank">repo</a>.</p>
+      <strong>Steps to get started:</strong>
+      <ol class="list-group list-group-ordered mb-3">
+        <li class="list-group-item">Install as dependency</li>
+        <li class="list-group-item">Import ngx-toastr module and set default options</li>
+        <li class="list-group-item">Import @sebgroup/ngx-toastr styles</li>
+      </ol>
+      <strong>Install with:</strong>
+      <p><code>npm install @sebgroup/ngx-toastr --save</code></p>
+      <strong>Usage and configuration:</strong>
+      <p>This component is meant to be used together with <a href="">@sebgroup/bootstrap</a> and in order for the component to get the correct appearance you need to add the following options to the ngx-toastr global configuration options:</p>
+      <exemplify [sources]="[{
+        'name':'Toastr global config options',
+        'src':'{\n  toastClass: \'toast\',\n'+
+        '  positionClass: \'toast-bottom-right\'\n}','lang':'js'
+        }]"></exemplify>
+      <p class="mt-3">I.e. the app module, component and global styles should look something like this:</p>
+      <exemplify [sources]="[{
+        'name':'app.module.ts',
+        'src':'https://raw.githubusercontent.com/@sebgroup/ngx-toastr/master/src/app/app.module.ts'
+        },{
+        'name':'app.component.ts',
+        'src':'https://raw.githubusercontent.com/@sebgroup/ngx-toastr/master/src/app/app.component.ts'
+        },{
+        'name':'styles.scss',
+        'src':'@import \'~@sebgroup/bootstrap/scss/styles/functions\';\n'+
+'@import \'~@sebgroup/bootstrap/scss/variables\';\n'+
+'@import \'~@sebgroup/bootstrap/scss/mixins/mixins\';\n'+
+'@import \'~@sebgroup/bootstrap/scss/styles/reboot\';\n'+
+'@import \'~@sebgroup/bootstrap/scss/styles/toasts\';\n'+
+'@import \'~@sebgroup/ngx-toastr/scss/ngx-toastr\';\n'+
+'@import \'~@sebgroup/fonts/scss/seb-fonts\';','lang':'css'
+        }]"></exemplify>
+    </div>
+  </div>
+    <h2 class="mt-4">Examples</h2>
 
+<div class="card my-3 mx-n3 mx-md-0">
+  <h4 class="card-header pb-0">Standard toast notifications</h4>
+  <div class="card-body" id="standard"><p>By default toast notifications are positioned bottom right on desktop to avoid overlaying the navigation to the left. On tablets and smaller screens where the menu is hidden, they appear bottom left and on small screens (mobile devices) they use full width.</p>
+    <div class="row">
+      <div class="col-6 col-md-auto mb-3 mb-md-0">
+        <button class="btn btn-primary w-100" (click)="showToast('info', true)">Show info</button>
+      </div>
+      <div class="col-6 col-md-auto mb-3 mb-md-0">
+        <button class="btn btn-primary w-100" (click)="showToast('success', true)">Show success</button>
+      </div>
+      <div class="col-6 col-md-auto">
+        <button class="btn btn-primary w-100" (click)="showToast('warning', true)">Show warning</button>
+      </div>
+      <div class="col-6 col-md-auto">
+        <button class="btn btn-primary w-100" (click)="showToast('error', true)">Show error</button>
+      </div>
+    </div>
+    <exemplify [selector]="'#standard > *:not(exemplify)'"></exemplify>
+  </div>
+</div>
+<div class="card my-3 mx-n3 mx-md-0">
+  <h4 class="card-header pb-0">Toast notifications with timeout</h4>
+  <div class="card-body" id="timeout"><p>These toasts will disappear after a set time.</p>
+    <div class="row">
+      <div class="col-6 col-md-auto mb-3 mb-md-0">
+        <button class="btn btn-primary w-100" (click)="showToast('info')">Show info</button>
+      </div>
+      <div class="col-6 col-md-auto mb-3 mb-md-0">
+        <button class="btn btn-primary w-100" (click)="showToast('success')">Show success</button>
+      </div>
+      <div class="col-6 col-md-auto">
+        <button class="btn btn-primary w-100" (click)="showToast('warning')">Show warning</button>
+      </div>
+      <div class="col-6 col-md-auto">
+        <button class="btn btn-primary w-100" (click)="showToast('error')">Show error</button>
+      </div>
+    </div>
+    <exemplify [selector]="'#timeout > *:not(exemplify)'"></exemplify>
+  </div>
+</div>
+<div class="card my-3 mx-n3 mx-md-0">
+  <h4 class="card-header pb-0">Inline Toast notifications</h4>
+  <div class="card-body" id="inline"><p>These toasts will be added inline.</p>
+    <div toastContainer class="mb-3"></div>
+    <div class="row">
+      <div class="col-6 col-md-auto mb-3 mb-md-0">
+        <button class="btn btn-primary w-100" (click)="showToast('info', true, true)">Show info</button>
+      </div>
+      <div class="col-6 col-md-auto mb-3 mb-md-0">
+        <button class="btn btn-primary w-100" (click)="showToast('success', true, true)">Show success</button>
+      </div>
+      <div class="col-6 col-md-auto">
+        <button class="btn btn-primary w-100" (click)="showToast('warning', true, true)">Show warning</button>
+      </div>
+      <div class="col-6 col-md-auto">
+        <button class="btn btn-primary w-100" (click)="showToast('error', true, true)">Show error</button>
+      </div>
+    </div>
+    <exemplify [selector]="'#inline > *:not(exemplify)'"></exemplify>
+  </div>
+</div>
+</div>

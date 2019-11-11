@@ -1,6 +1,19 @@
-# NgxToastr
+# @sebgroup/ngx-toastr
+[![Build Status](https://travis-ci.com/sebgroup/ngx-toastr.svg?token=tzrdkWGEu776AVobzRhp&branch=master)](https://travis-ci.com/sebgroup/ngx-toastr)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.5.
+
+## Install with npm
+```
+npm install @sebgroup/ngx-toastr --save
+```
+
+For more info please see the [wiki](https://github.com/sebgroup/ngx-toastr/wiki)
+
+
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
 ## Development server
 
