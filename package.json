@@ -6,6 +6,7 @@
     "ng": "ng",
     "start": "ng serve --port=4201",
     "build": "ng build --base-href https://sebgroup.github.io/ngx-toastr/ && copyfiles -f src/404.html dist/ngx-toastr",
+    "build-dev": "ng build --base-href https://sebgroup.github.io/ngx-toastr/dev/ --output-path dist/ngx-toastr//dev && copyfiles -f src/dev/404.html dist/ngx-toastr/dev",
     "build-lib": "copyfiles -u 1 'scss/**/*.scss' dist/lib/scss && copyfiles -f CHANGELOG.md LICENSE.md README.md scss/package.json dist/lib",
     "test": "ng test",
     "test-ci": "ng test --watch=false --progress --browsers=ChromeHeadlessNoSandbox",
