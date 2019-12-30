@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 // minimal scss dependencies for toasts
-@import '~@sebgroup/bootstrap/scss/styles/functions';
-@import '~@sebgroup/bootstrap/scss/variables';
-@import '~@sebgroup/bootstrap/scss/mixins/mixins';
+@import '~@sebgroup/bootstrap/scss/core';
 @import '~@sebgroup/bootstrap/scss/styles/reboot';
 @import '~@sebgroup/bootstrap/scss/styles/toasts';
 @import '~@sebgroup/fonts/scss/seb-fonts';
