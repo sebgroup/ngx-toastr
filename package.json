@@ -4,7 +4,7 @@
   "homepage": "https://sebgroup.github.io/ngx-toastr/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port=4201",
+    "start": "ng serve --port=4200",
     "build": "ng build --base-href https://sebgroup.github.io/ngx-toastr/ && copyfiles -f src/404.html dist/ngx-toastr",
     "build-dev": "ng build --base-href https://sebgroup.github.io/ngx-toastr/dev/ --output-path dist/ngx-toastr/dev && copyfiles -f src/dev/404.html dist/ngx-toastr/dev",
     "build-lib": "copyfiles -u 1 'scss/**/*.scss' dist/lib/scss && copyfiles -f CHANGELOG.md LICENSE.md README.md scss/package.json dist/lib",
@@ -12,6 +12,7 @@
     "test-ci": "ng test --watch=false --progress --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "e2e:watch": "watch 'ng e2e --devServerTarget' src e2e --wait=1",
     "e2e-ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "commit": "git-cz",
     "travis-deploy-once": "travis-deploy-once --pro",
@@ -83,7 +84,8 @@
     "travis-deploy-once": "^5.0.11",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "watch": "^1.0.2"
   },
   "repository": {
     "type": "git",
