@@ -26,6 +26,7 @@ const toasts: Array<any> = [
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+  package = '@sebgroup/ngx-toastr';
   title = '';
   message = '';
   @ViewChildren(ToastContainerDirective) inlineContainers: QueryList<ToastContainerDirective>;
