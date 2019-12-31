@@ -23,6 +23,6 @@ export class AppPage {
   }
 
   getToast(inline = false) {
-    return element(by.css(`${inline ? '[toastcontainer] ' : ''}#toast-container [toast-component]:first-child`)).getAttribute('class');
+    return element(by.css(`${inline ? '[toastcontainer] ' : ''}#toast-container [toast-component]`));
   }
 }

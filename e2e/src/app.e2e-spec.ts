@@ -1,10 +1,11 @@
 import { AppPage } from './app.po';
-import {browser} from 'protractor';
+import {browser, ElementFinder, protractor} from 'protractor';
 
-describe('workspace-project App', () => {
+describe('Test documentation', () => {
   let page: AppPage;
   let previousSnippet: any;
   let currentSnippet: any;
+  const EC = protractor.ExpectedConditions;
 
   beforeEach(() => {
     page = new AppPage();
@@ -15,113 +16,72 @@ describe('workspace-project App', () => {
     expect(page.getParagraphText()).toEqual('@sebgroup/ngx-toastr');
   });
 
-  it('should display toastr config options', () => {
-    currentSnippet = page.getSnippet('config_example');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-
+  const SNIPPETS = [
+    {id: 'config'},
+    {id: 'module', tab: 'app.module.ts'},
+    {id: 'module', tab: 'app.component.ts'},
+    {id: 'module', tab: 'styles.scss'},
+    {id: 'standard'},
+    {id: 'timeout'},
+    {id: 'inline'},
+    ];
+  describe('Test code snippets', () => {
+    // create tests for each snippet
+    SNIPPETS.map(snippet => {
+      it(`should display unique example for ${snippet.id}${snippet.tab ? ' and ' + snippet.tab : ''}`, () => {
+        currentSnippet = page.getSnippet(`${snippet.id}_example`, snippet.tab);
+        expect(currentSnippet).toBeTruthy();
+        expect(currentSnippet).not.toEqual(previousSnippet);
+        previousSnippet = currentSnippet;
+      });
+    });
   });
 
-  it('should display unique app module example', () => {
-    currentSnippet = page.getSnippet('module_example', 'app.module.ts');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-  });
+  const TOASTS = [
+    {id: 'standard', selector: '.col-6:nth-child(1) .btn', type: 'info'},
+    {id: 'standard', selector: '.col-6:nth-child(2) .btn', type: 'success'},
+    {id: 'standard', selector: '.col-6:nth-child(3) .btn', type: 'warning'},
+    {id: 'standard', selector: '.col-6:nth-child(4) .btn', type: 'error'},
+    {id: 'timeout', selector: '.col-6:nth-child(1) .btn', type: 'info'},
+    {id: 'timeout', selector: '.col-6:nth-child(2) .btn', type: 'success'},
+    {id: 'timeout', selector: '.col-6:nth-child(3) .btn', type: 'warning'},
+    {id: 'timeout', selector: '.col-6:nth-child(4) .btn', type: 'error'},
+    {id: 'inline', selector: '.col-6:nth-child(1) .btn',  type: 'info'},
+    {id: 'inline', selector: '.col-6:nth-child(2) .btn',  type: 'success'},
+    {id: 'inline', selector: '.col-6:nth-child(3) .btn',  type: 'warning'},
+    {id: 'inline', selector: '.col-6:nth-child(4) .btn',  type: 'error'},
+    ];
+  const getTestDescription = (toast: any, action: string = 'display', trigger: string = 'button click') => {
+    switch (toast.id) {
+      case 'inline':
+        return `should ${action} ${toast.type} toast inline on ${toast.type} ${trigger}`;
+      case 'timeout':
+        return `should ${action} ${toast.type} toast with timeout on ${toast.type} ${trigger}`;
+      default:
+        return `should ${action} ${toast.type} toast on ${toast.type} ${trigger}`;
+    }
+  };
+  describe('Test toasts', () => {
+    let toastEl: ElementFinder;
+    let inline = false; // is toast displayed inline
 
-  it('should display unique app component example', () => {
-    currentSnippet = page.getSnippet('module_example', 'app.component.ts');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-  });
+    beforeEach(() => {
+      toastEl =  page.getToast(inline);
+    });
 
-  it('should display unique style example', () => {
-    currentSnippet = page.getSnippet('module_example', 'styles.scss');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-  });
-
-  it('should display markup for standard example', () => {
-    currentSnippet = page.getSnippet('standard_example');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-  });
-
-  it('should display markup for example with timeout', () => {
-    currentSnippet = page.getSnippet('timeout_example');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-  });
-
-  it('should display markup for inline example', () => {
-    currentSnippet = page.getSnippet('inline_example');
-    expect(currentSnippet).toBeTruthy();
-    expect(currentSnippet).not.toEqual(previousSnippet);
-    previousSnippet = currentSnippet;
-  });
-
-  it('should display standard info toast', () => {
-    page.getButton('#standard .col-6:nth-child(1) .btn').click();
-    expect(page.getToast()).toContain('toast-info');
-  });
-
-  it('should display standard success toast', () => {
-    page.getButton('#standard .col-6:nth-child(2) .btn').click();
-    expect(page.getToast()).toContain('toast-success');
-  });
-
-  it('should display standard warning toast', () => {
-    page.getButton('#standard .col-6:nth-child(3) .btn').click();
-    expect(page.getToast()).toContain('toast-warning');
-  });
-
-  it('should display standard error toast', () => {
-    page.getButton('#standard .col-6:nth-child(4) .btn').click();
-    expect(page.getToast()).toContain('toast-error');
-  });
-
-  it('should display info toast with timeout', () => {
-    page.getButton('#timeout .col-6:nth-child(1) .btn').click();
-    expect(page.getToast()).toContain('toast-info');
-  });
-
-  it('should display success toast with timeout', () => {
-    page.getButton('#timeout .col-6:nth-child(2) .btn').click();
-    expect(page.getToast()).toContain('toast-success');
-  });
-
-  it('should display warning toast with timeout', () => {
-    page.getButton('#timeout .col-6:nth-child(3) .btn').click();
-    expect(page.getToast()).toContain('toast-warning');
-  });
-
-  it('should display error toast with timeout', () => {
-    page.getButton('#timeout .col-6:nth-child(4) .btn').click();
-    expect(page.getToast()).toContain('toast-error');
-  });
-
-  it('should display info inline toast', () => {
-    page.getButton('#inline .col-6:nth-child(1) .btn').click();
-    expect(page.getToast(true)).toContain('toast-info');
-  });
-
-  it('should display success inline toast', () => {
-    page.getButton('#inline .col-6:nth-child(2) .btn').click();
-    expect(page.getToast(true)).toContain('toast-success');
-  });
-
-  it('should display warning inline toast', () => {
-    page.getButton('#inline .col-6:nth-child(3) .btn').click();
-    expect(page.getToast(true)).toContain('toast-warning');
-  });
-
-  it('should display error inline toast', () => {
-    page.getButton('#inline .col-6:nth-child(4) .btn').click();
-    expect(page.getToast(true)).toContain('toast-error');
+    // create tests for each toast type
+    TOASTS.map(toast => {
+      it(getTestDescription(toast), () => {
+        inline = toast.id === 'inline'; // set inline to true if id equals inline
+        page.getButton(`#${toast.id} ${toast.selector}`).click();
+        expect(toastEl.getAttribute('class')).toContain(`toast-${toast.type}`);
+      });
+      it(getTestDescription(toast, 'close', 'toast click'), () => {
+        inline = toast.id === 'inline'; // set inline to true if id equals inline
+        toastEl.click();
+        browser.wait(EC.not(EC.presenceOf(toastEl))); // wait until toast has been removed
+        expect(toastEl.isPresent()).toBeFalsy();
+      });
+    });
   });
 });
